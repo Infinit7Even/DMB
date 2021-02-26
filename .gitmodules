@@ -1,0 +1,3 @@
+[submodule "src/archiver"]
+	path = src/archiver
+	url = https://github.com/plum-bot/archiver.git

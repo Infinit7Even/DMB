@@ -1,57 +1,33 @@
-/*
- * Copyright (c) 2020 Cynthia K. Rey
- * Licensed under the Open Software License version 3.0
- */
+const { Client, SQLiteProvider } = require('discord.js-commando');
+const { open } = require('sqlite');
+const { Database } = require('sqlite3');
+const dotenv = require("dotenv");
+const { join } = require('path');
+const { env } = require('process');
+dotenv.config();
 
-import './elements/ThemeSwitch'
-import './elements/DiscordMessages'
-import './elements/DiscordMessage'
-import './elements/MessageHeader'
-import './elements/MessageAvatar'
-import './elements/MessageDate'
-import './elements/MessageMarkup'
-import './elements/MessageEmoji'
-import './elements/MessageMention'
-import './elements/MessageSpoiler'
-import './elements/MessageCodeblock'
-import './elements/MessageImage'
-import './elements/MessageVideo'
-import './elements/MessageAttachment'
-import './elements/DiscordInvite'
-import { copy, contextMenu } from './utils'
+const client = new Client({
+    owner: env.OWNER,
+    commandPrefix: env.PREFIX
+});
 
-// Context menus
-window.addEventListener('contextmenu', e => {
-  e.preventDefault()
-  // Remove any previous context menu
-  const el = document.querySelector('.context-menu')
-  if (el) el.remove()
-})
 
-document.querySelectorAll('img[data-clickable], message-markup a, .embed a').forEach(link => {
-  contextMenu(link, [
-    {
-      name: 'Copy Link',
-      callback: () => copy(link.src || link.href)
-    },
-    {
-      name: 'Open Link',
-      callback: () => open(link.src || link.href)
-    }
-  ])
-})
+client.registry
+    // Registers your custom command groups
+    .registerGroups([
+        ['fun', 'Fun commands'],
+        ['some', 'Some group'],
+        ['other', 'Some other group']
+    ])
 
-// User Agents
-function onLoad () {
-  if (navigator.userAgent.toLowerCase().indexOf('firefox') !== -1) {
-    document.body.classList.add('firefox')
-  }
+    // Registers all built-in groups, commands, and argument types
+    .registerDefaults()
 
-  if (navigator.userAgent.toLowerCase().indexOf('chrome') !== -1) {
-    document.body.classList.add('chrome')
-  }
-}
+    // Registers all of your commands in the ./commands/ directory
+    .registerCommandsIn(join(__dirname, 'commands'));
 
-document.readyState === 'loading'
-  ? document.addEventListener('DOMContentLoaded', onLoad)
-  : onLoad()
+client.setProvider(
+    open({ filename: 'database.db', driver: Database }).then(db => new SQLiteProvider(db))
+).catch(console.error);
+
+client.login(process.env.DISCORD_TOKEN);

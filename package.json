@@ -1,31 +1,20 @@
 {
-  "name": "discord-chat-replica",
-  "version": "1.0.0",
-  "main": "index.js",
-  "author": "Cynthia <cynthia@cynthia.dev>",
-  "license": "OSL-3.0",
-  "scripts": {
-    "build-scss": "sass -s compressed style/style.scss:dist/style.css && node dl-font.js",
-    "build-js": "esbuild src/index.js --outfile=dist/script.js --bundle --minify --target=chrome85,firefox81,safari13,edge86 --define:process.env.NODE_ENV='\"production\"'",
-    "build": "pnpm run build-js && pnpm run build-scss"
-  },
-  "dependencies": {
-    "ejs": "^3.1.5",
-    "highlight.js": "^10.4.1",
-    "html-minifier": "^4.0.0",
-    "mime-types": "^2.1.27",
-    "punycode": "^2.1.1",
-    "simple-markdown": "^0.7.2",
-    "twemoji": "^13.0.1"
-  },
-  "devDependencies": {
-    "esbuild": "^0.8.26",
-    "eslint": "^7.16.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.1.0",
-    "sass": "^1.30.0"
-  }
+    "name": "plum-backup",
+    "version": "1.0.0",
+    "main": "src/index.js",
+    "author": "Samplasion",
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "adm-zip": "^0.5.3",
+        "discord.js": "^12.5.1",
+        "discord.js-commando": "^0.12.2",
+        "dotenv": "^8.2.0",
+        "phin": "^3.5.1",
+        "sqlite": "^4.0.19",
+        "sqlite3": "^5.0.2"
+    },
+    "scripts": {
+        "start": "node src"
+    }
 }

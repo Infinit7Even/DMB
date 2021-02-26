@@ -1,9 +1,5 @@
-# JetBrains memes
-.idea
-
-# NodeJS memes
+.env
 node_modules
-
-# prod memes
-config.json
-dist
+database.db
+yarn-error.log
+pnpm-lock.yaml
