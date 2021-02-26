@@ -1,4 +1,4 @@
-# DMB Discord Message Backup Bot
+# Discord Message Backup Bot
 By [Samplasion](https://github.com/Samplasion)
 
 ### How to Run
